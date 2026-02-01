@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shambhavi Gunda | Data Scientist & AI Engineer</title>
+    <meta name="description" content="Shambhavi Gunda - Data Analyst and AI Engineer specializing in Deep Learning, Power BI, Machine Learning, and Full-Stack Development.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@400;600;700&display=swap');
+        
+        :root {
+            --bg-primary: #faf9f6;
+            --bg-secondary: #f5f1e8;
+            --accent-beige: #d4a574;
+            --accent-gold: #c9b18a;
+            --text-primary: #2c2c2c;
+            --text-secondary: #5a5a5a;
+            --border-light: #e8e4dc;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .font-elegant {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        /* Subtle beige gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #8b6f47 0%, #d4a574 50%, #c9b18a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Glass morphism for light theme */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+        }
+        
+        /* Floating animation - slower and more elegant */
+        .floating {
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        /* Soft organic blobs in beige tones */
+        .blob {
+            position: absolute;
+            filter: blur(90px);
+            opacity: 0.15;
+            z-index: -1;
+            animation: blob-float 15s infinite ease-in-out;
+        }
+        
+        @keyframes blob-float {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: translate(0, 0); }
+            33% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; transform: translate(30px, -30px); }
+            66% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; transform: translate(-20px, 20px); }
+        }
+        
+        /* Timeline styling */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom, #d4a574, #c9b18a);
+            opacity: 0.4;
+        }
+        
+        /* Card hover effects - subtle lift */
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1 !important;
+            transform: none !important;
+            background: white;
+            border: 1px solid var(--border-light);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px) !important;
+            box-shadow: 0 20px 40px -15px rgba(139, 111, 71, 0.15);
+            border-color: rgba(212, 165, 116, 0.4);
+        }
+        
+        /* Navigation blur */
+        .nav-blur {
+            background: rgba(250, 249, 246, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 165, 116, 0.1);
+        }
+        
+        /* Button styling */
+        .btn-primary {
+            background: linear-gradient(135deg, #d4a574 0%, #c9b18a 100%);
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-primary:hover:before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(212, 165, 116, 0.4);
+        }
+        
+        /* Subtle grain texture overlay */
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        
+        /* Elegant link underline animation */
+        .link-hover {
+            position: relative;
+            text-decoration: none;
+        }
+        
+        .link-hover:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #d4a574;
+            transition: width 0.3s ease;
+        }
+        
+        .link-hover:hover:after {
+            width: 100%;
+        }
+        
+        /* Section divider */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4a574, transparent);
+            opacity: 0.3;
+            margin: 4rem auto;
+            width: 60%;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #faf9f6;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #d4a574;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c9b18a;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Grain texture overlay -->
+    <div class="grain"></div>
+
+    <!-- Background Blobs - Soft beige tones -->
+    <div class="blob bg-[#e6d5b8] w-[500px] h-[500px] top-0 left-0"></div>
+    <div class="blob bg-[#d4a574] w-[400px] h-[400px] bottom-0 right-0"></div>
+    <div class="blob bg-[#c9b18a] w-[300px] h-[300px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-blur transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="text-2xl font-serif font-bold tracking-tight text-[#2c2c2c]">
+                SG<span class="text-[#d4a574]">.</span>
+            </div>
+            <div class="hidden md:flex space-x-10 text-sm font-medium text-[#5a5a5a]">
+                <a href="#home" class="link-hover hover:text-[#d4a574] transition-colors">Home</a>
+                <a href="#education" class="link-hover hover:text-[#d4a574] transition-colors">Education</a>
+                <a href="#experience" class="link-hover hover:text-[#d4a574] transition-colors">Experience</a>
+                <a href="#projects" class="link-hover hover:text-[#d4a574] transition-colors">Projects</a>
+                <a href="#skills" class="link-hover hover:text-[#d4a574] transition-colors">Skills</a>
+                <a href="#contact" class="link-hover hover:text-[#d4a574] transition-colors">Contact</a>
+            </div>
+            <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" class="btn-primary px-6 py-2.5 rounded-full text-sm font-medium shadow-lg shadow-[#d4a574]/20">
+                Hire Me
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative pt-20 px-6 bg-gradient-to-b from-[#faf9f6] via-[#faf9f6] to-[#f5f1e8]">
+        <div class="container mx-auto grid md:grid-cols-2 gap-16 items-center max-w-6xl">
+            <div class="order-2 md:order-1 space-y-8">
+                <div class="space-y-4">
+                    <p class="font-elegant text-[#d4a574] text-lg italic tracking-wide">Hello, I'm</p>
+                    <h1 class="text-5xl md:text-7xl font-serif font-bold leading-[1.1] text-[#2c2c2c]">
+                        Shambhavi <br>
+                        <span class="gradient-text">Gunda</span>
+                    </h1>
+                    <p class="text-xl text-[#5a5a5a] font-light leading-relaxed max-w-lg">
+                        Data Analyst & AI Engineer crafting intelligent solutions with <span class="text-[#8b6f47] font-medium">Deep Learning</span> and <span class="text-[#8b6f47] font-medium">Data Visualization</span>
+                    </p>
+                </div>
+                
+                <div class="flex flex-wrap gap-6 text-[#5a5a5a] text-sm">
+                    <span class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-[#d4a574]"></i> Hyderabad, India</span>
+                    <span class="flex items-center gap-2"><i class="fas fa-graduation-cap text-[#d4a574]"></i> VIT (CGPA: 8.7)</span>
+                </div>
+
+                <!-- Social Links - Minimal circles -->
+                <div class="flex gap-4">
+                    <a href="mailto:shambhavi.gunda@gmail.com" class="w-11 h-11 rounded-full border border-[#e8e4dc] flex items-center justify-center hover:bg-[#d4a574] hover:border-[#d4a574] hover:text-white text-[#5a5a5a] transition-all duration-300">
+                        <i class="fas fa-envelope text-sm"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/shambhavi-gunda" target="_blank" class="w-11 h-11 rounded-full border border-[#e8e4dc] flex items-center justify-center hover:bg-[#d4a574] hover:border-[#d4a574] hover:text-white text-[#5a5a5a] transition-all duration-300">
+                        <i class="fab fa-linkedin-in text-sm"></i>
+                    </a>
+                    <a href="https://github.com/Shambhavi-Gunda" target="_blank" class="w-11 h-11 rounded-full border border-[#e8e4dc] flex items-center justify-center hover:bg-[#d4a574] hover:border-[#d4a574] hover:text-white text-[#5a5a5a] transition-all duration-300">
+                        <i class="fab fa-github text-sm"></i>
+                    </a>
+                    <a href="tel:+919014070981" class="w-11 h-11 rounded-full border border-[#e8e4dc] flex items-center justify-center hover:bg-[#d4a574] hover:border-[#d4a574] hover:text-white text-[#5a5a5a] transition-all duration-300">
+                        <i class="fas fa-phone text-sm"></i>
+                    </a>
+                </div>
+
+                <!-- Download Resume Button -->
+                <div class="relative inline-block mt-6 group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-[#d4a574] to-[#c9b18a] rounded-full blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+                    <a href="RESUME%20.pdf" download="Shambhavi_Gunda_Resume.pdf" class="relative inline-flex items-center gap-3 bg-[#2c2c2c] text-white px-8 py-4 rounded-full font-medium hover:bg-[#1a1a1a] transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5">
+                        <i class="fas fa-download text-sm"></i>
+                        <span>Download Resume</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="order-1 md:order-2 flex justify-center">
+                <div class="relative w-80 h-80 md:w-96 md:h-96">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-[#d4a574]/20 to-[#c9b18a]/20 rounded-full blur-3xl"></div>
+                    <div class="absolute inset-0 border border-[#d4a574]/20 rounded-full animate-[spin_20s_linear_infinite]"></div>
+                    <div class="absolute inset-2 border border-[#c9b18a]/10 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+                    <img src="professional%20photo.jpeg" alt="Shambhavi Gunda" class="relative w-full h-full object-cover rounded-full shadow-2xl shadow-[#d4a574]/10 floating border-4 border-white">
+                    
+                    <!-- Floating badges - Minimal style -->
+                    <div class="absolute -bottom-2 -left-2 bg-white px-5 py-2.5 rounded-full text-sm font-medium text-[#2c2c2c] shadow-lg border border-[#f0ebe3] flex items-center gap-2 animate-[bounce_3s_infinite]">
+                        <span class="w-2 h-2 rounded-full bg-[#d4a574]"></span>
+                        AI Expert
+                    </div>
+                    <div class="absolute -top-2 -right-2 bg-white px-5 py-2.5 rounded-full text-sm font-medium text-[#2c2c2c] shadow-lg border border-[#f0ebe3] flex items-center gap-2 animate-[bounce_4s_infinite]">
+                        <span class="w-2 h-2 rounded-full bg-[#c9b18a]"></span>
+                        Data Analyst
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 px-6 content-section">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <p class="font-elegant text-[#d4a574] text-lg italic mb-2">Academic Background</p>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-[#2c2c2c]">Education</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- B.Tech -->
+                <div class="card-hover rounded-2xl p-8 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-[#d4a574]/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150 duration-500"></div>
+                    <div class="text-[#d4a574] text-2xl mb-4"><i class="fas fa-university"></i></div>
+                    <h3 class="text-xl font-serif font-bold mb-2 text-[#2c2c2c]">B.Tech CSE</h3>
+                    <p class="text-[#5a5a5a] mb-3 font-medium">Vellore Institute of Technology</p>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-2xl font-bold text-[#8b6f47]">8.7</span>
+                        <span class="text-sm text-[#5a5a5a]">CGPA</span>
+                    </div>
+                    <p class="text-sm text-[#5a5a5a]/70 border-t border-[#e8e4dc] pt-3">Sep 2022 - Sep 2026</p>
+                </div>
+
+                <!-- XII -->
+                <div class="card-hover rounded-2xl p-8 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-[#c9b18a]/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150 duration-500"></div>
+                    <div class="text-[#c9b18a] text-2xl mb-4"><i class="fas fa-school"></i></div>
+                    <h3 class="text-xl font-serif font-bold mb-2 text-[#2c2c2c]">Senior Secondary</h3>
+                    <p class="text-[#5a5a5a] mb-3 font-medium">Urbane Junior College, MPC</p>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-2xl font-bold text-[#8b6f47]">97.8%</span>
+                    </div>
+                    <p class="text-sm text-[#5a5a5a]/70 border-t border-[#e8e4dc] pt-3">Apr 2020 - Apr 2022</p>
+                </div>
+
+                <!-- X -->
+                <div class="card-hover rounded-2xl p-8 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-[#d4a574]/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150 duration-500"></div>
+                    <div class="text-[#d4a574] text-2xl mb-4"><i class="fas fa-graduation-cap"></i></div>
+                    <h3 class="text-xl font-serif font-bold mb-2 text-[#2c2c2c]">High School</h3>
+                    <p class="text-[#5a5a5a] mb-3 font-medium">Rockwell International School</p>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-2xl font-bold text-[#8b6f47]">92.4%</span>
+                    </div>
+                    <p class="text-sm text-[#5a5a5a]/70 border-t border-[#e8e4dc] pt-3">Apr 2019 - Apr 2020</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 px-6 relative content-section bg-[#f5f1e8]/30">
+        <div class="container mx-auto max-w-5xl">
+            <div class="text-center mb-16">
+                <p class="font-elegant text-[#d4a574] text-lg italic mb-2">Professional Journey</p>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-[#2c2c2c]">Experience</h2>
+            </div>
+            
+            <div class="relative">
+                <div class="timeline-line"></div>
+                
+                <div class="mb-16 relative">
+                    <div class="flex items-center justify-center mb-8">
+                        <div class="w-3 h-3 bg-[#d4a574] rounded-full border-4 border-[#faf9f6] z-10 shadow-lg"></div>
+                    </div>
+                    
+                    <div class="card-hover rounded-2xl p-8 md:p-10 max-w-3xl mx-auto relative">
+                        <div class="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-[#d4a574] to-[#c9b18a] rounded-l-2xl"></div>
+                        
+                        <div class="flex flex-wrap justify-between items-start mb-6 gap-4">
+                            <div>
+                                <h3 class="text-2xl font-serif font-bold text-[#2c2c2c] mb-1">Data Analyst Intern</h3>
+                                <p class="text-[#d4a574] font-semibold text-lg">NullClass Pvt. Ltd.</p>
+                            </div>
+                            <span class="text-xs font-medium text-[#5a5a5a] bg-[#f5f1e8] px-4 py-1.5 rounded-full border border-[#e8e4dc]">Sep 2022 - Present</span>
+                        </div>
+                        
+                        <ul class="space-y-4 text-[#5a5a5a] leading-relaxed">
+                            <li class="flex gap-4 items-start">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#d4a574] mt-2 flex-shrink-0"></span>
+                                <span>Designed four interactive <strong class="text-[#2c2c2c]">Power BI dashboards</strong> analyzing <strong class="text-[#2c2c2c]">2,500+ Twitter interactions</strong> to optimize content strategy</span>
+                            </li>
+                            <li class="flex gap-4 items-start">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#d4a574] mt-2 flex-shrink-0"></span>
+                                <span>Automated <strong class="text-[#2c2c2c]">ETL workflows</strong>, reducing manual processing time by <strong class="text-[#2c2c2c]">30%</strong></span>
+                            </li>
+                            <li class="flex gap-4 items-start">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#d4a574] mt-2 flex-shrink-0"></span>
+                                <span>Validated data transformations, improving dashboard accuracy and decision-making by <strong class="text-[#2c2c2c]">20%</strong></span>
+                            </li>
+                        </ul>
+                        
+                        <div class="mt-6 pt-6 border-t border-[#e8e4dc] flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-[#d4a574]/10 text-[#8b6f47] rounded-full text-xs font-medium">Power BI</span>
+                            <span class="px-3 py-1 bg-[#d4a574]/10 text-[#8b6f47] rounded-full text-xs font-medium">ETL</span>
+                            <span class="px-3 py-1 bg-[#d4a574]/10 text-[#8b6f47] rounded-full text-xs font-medium">Data Analysis</span>
+                            <span class="px-3 py-1 bg-[#d4a574]/10 text-[#8b6f47] rounded-full text-xs font-medium">DAX</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-6 content-section">
+        <div class="container mx-auto max-w-7xl">
+            <div class="text-center mb-16">
+                <p class="font-elegant text-[#d4a574] text-lg italic mb-2">Featured Work</p>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-[#2c2c2c]">Projects</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Project 1: Brain MRI -->
+                <div class="card-hover rounded-2xl overflow-hidden group">
+                    <div class="h-56 bg-gradient-to-br from-[#e6d5b8] to-[#d4a574]/30 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23d4a574\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-50"></div>
+                        <i class="fas fa-brain text-6xl text-[#8b6f47]/20 group-hover:scale-110 transition-transform duration-700"></i>
+                        <div class="absolute top-4 right-4 bg-white/80 backdrop-blur px-4 py-1.5 rounded-full text-xs font-bold text-[#8b6f47] shadow-sm">99.82% Accuracy</div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-serif font-bold mb-3 text-[#2c2c2c]">Brain MRI Tumour Detection</h3>
+                        <p class="text-[#5a5a5a] text-sm mb-6 leading-relaxed">
+                            Co-authored research paper analyzing <strong class="text-[#2c2c2c]">5+ deep learning CNN models</strong> using <strong class="text-[#2c2c2c]">12,000+ scans</strong>. Built secure full-stack system with FastAPI, Streamlit, and JWT auth.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-[#f5f1e8] text-[#8b6f47] rounded-full text-xs font-medium border border-[#e8e4dc]">CNN</span>
+                            <span class="px-3 py-1 bg-[#f5f1e8] text-[#8b6f47] rounded-full text-xs font-medium border border-[#e8e4dc]">FastAPI</span>
+                            <span class="px-3 py-1 bg-[#f5f1e8] text-[#8b6f47] rounded-full text-xs font-medium border border-[#e8e4dc]">Streamlit</span>
+                            <span class="px-3 py-1 bg-[#f5f1e8] text-[#8b6f47] rounded-full text-xs font-medium border border-[#e8e4dc]">JWT</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Intrusion Detection -->
+                <div class="card-hover rounded-2xl overflow-hidden group">
+                    <div class="h-56 bg-gradient-to-br from-[#c9b18a]/30 to-[#e6d5b8] flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23c9b18a\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-50"></div>
+                        <i class="fas fa-shield-alt text-6xl text-[#8b6f47]/20 group-hover:scale-110 transition-transform duration-700"></i>
+                        <div class="absolute top-4 right-4 bg-white/80 backdrop-blur px-4 py-1.5 rounded-full text-xs font-bold text-[#8b6f47] shadow-sm">IIoT Security</div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-serif font-bold mb-3 text-[#2c2c2c]">Intrusion Detection in Smart Agriculture</h3>
+                        <p class="text-[#5a5a5a] text-sm mb-6 leading-relaxed">
+                            Developed custom intrusion detection models analyzing <strong class="text-[#2c2c2c]">1.3M traffic instances</strong>, improving processing time by <strong class="text-[#2c2c2c]">18%</strong> and blocking <strong class="text-[#2c2c2c]">75+ intrusion attempts</strong> weekly.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-[#f5f1e8] text-[#8b6f47] rounded-full text-xs font-medium border border-[#e8e4dc]">Cybersecurity</span>
+                            <span class="px-3 py-1 bg-[#f5f1e8] text-[#8b6f47] rounded-full text-xs font-medium border border-[#e8e4dc]">IIoT</span>
+                            <span class="px-3 py-1 bg-[#f5f1e8] text-[#8b6f47] rounded-full text-xs font-medium border border-[#e8e4dc]">ML</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Stock Price -->
+                <div class="card-hover rounded-2xl overflow-hidden group">
+                    <div class="h-56 bg-gradient-to-br from-[#d4a574]/20 to-[#c9b18a]/20 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23d4a574\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-50"></div>
+                        <i class="fas fa-chart-line text-6xl text-[#8b6f47]/20 group-hover:scale-110 transition-transform duration-700"></i>
+                        <div class="absolute top-4 right-4 bg-white/80 backdrop-blur px-4 py-1.5 rounded-full text-xs font-bold text-[#8b6f47] shadow-sm">+12% Accuracy</div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-serif font-bold mb-3 text-[#2c2c2c]">Stock Price Prediction</h3>
+                        <p class="text-[#5a5a5a] text-sm mb-6 leading-relaxed">
+                            Integrated <strong class="text-[#2c2c2c]">LSTM, GRU, and Prophet models</strong> with automated ETL pipelines, boosting prediction accuracy by <strong class="text-[#2c2c2c]">12%</strong> and efficiency by <strong class="text-[#2c2c2c]">25%</strong>.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-[#f5f1e8] text-[#8b6f47] rounded-full text-xs font-medium border border-[#e8e4dc]">LSTM</span>
+                            <span class="px-3 py-1 bg-[#f5f1e8] text-[#8b6f47] rounded-full text-xs font-medium border border-[#e8e4dc]">GRU</span>
+                            <span class="px-3 py-1 bg-[#f5f1e8] text-[#8b6f47] rounded-full text-xs font-medium border border-[#e8e4dc]">ETL</span>
+                            <span class="px-3 py-1 bg-[#f5f1e8] text-[#8b6f47] rounded-full text-xs font-medium border border-[#e8e4dc]">Data Warehousing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: gramX -->
+                <div class="card-hover rounded-2xl overflow-hidden group">
+                    <div class="h-56 bg-gradient-to-br from-[#e6d5b8] via-[#d4a574]/20 to-[#c9b18a]/30 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23d4a574\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-50"></div>
+                        <i class="fas fa-share-nodes text-6xl text-[#8b6f47]/20 group-hover:scale-110 transition-transform duration-700"></i>
+                        <div class="absolute top-4 right-4 bg-white/80 backdrop-blur px-4 py-1.5 rounded-full text-xs font-bold text-[#8b6f47] shadow-sm">Full-Stack</div>
+                        <div class="absolute top-4 left-4">
+                            <span class="text-2xl font-serif font-bold text-[#8b6f47]/40 italic">gramX</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-serif font-bold mb-3 text-[#2c2c2c]">gramX - Social Media Platform</h3>
+                        <p class="text-[#5a5a5a] text-sm mb-6 leading-relaxed">
+                            Designed and implemented a <strong class="text-[#2c2c2c]">secure, scalable full-stack social media platform</strong> using FastAPI and Streamlit. Features JWT authentication and cloud-based media storage.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-[#f5f1e8] text-[#8b6f47] rounded-full text-xs font-medium border border-[#e8e4dc]">FastAPI</span>
+                            <span class="px-3 py-1 bg-[#f5f1e8] text-[#8b6f47] rounded-full text-xs font-medium border border-[#e8e4dc]">Streamlit</span>
+                            <span class="px-3 py-1 bg-[#f5f1e8] text-[#8b6f47] rounded-full text-xs font-medium border border-[#e8e4dc]">JWT Auth</span>
+                            <span class="px-3 py-1 bg-[#f5f1e8] text-[#8b6f47] rounded-full text-xs font-medium border border-[#e8e4dc]">Cloud Storage</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-6 content-section bg-[#f5f1e8]/20">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <p class="font-elegant text-[#d4a574] text-lg italic mb-2">Technical Arsenal</p>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-[#2c2c2c]">Skills</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Languages -->
+                <div class="card-hover rounded-2xl p-8">
+                    <h3 class="text-lg font-serif font-bold mb-6 text-[#8b6f47] flex items-center gap-3">
+                        <i class="fas fa-code text-[#d4a574]"></i> Languages
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-[#5a5a5a] border border-[#e8e4dc] hover:border-[#d4a574] hover:text-[#d4a574] transition-colors cursor-default">Python</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-[#5a5a5a] border border-[#e8e4dc] hover:border-[#d4a574] hover:text-[#d4a574] transition-colors cursor-default">R</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-[#5a5a5a] border border-[#e8e4dc] hover:border-[#d4a574] hover:text-[#d4a574] transition-colors cursor-default">SQL (MySQL)</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-[#5a5a5a] border border-[#e8e4dc] hover:border-[#d4a574] hover:text-[#d4a574] transition-colors cursor-default">Java</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-[#5a5a5a] border border-[#e8e4dc] hover:border-[#d4a574] hover:text-[#d4a574] transition-colors cursor-default">HTML</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-[#5a5a5a] border border-[#e8e4dc] hover:border-[#d4a574] hover:text-[#d4a574] transition-colors cursor-default">Kotlin (Basic)</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-[#5a5a5a] border border-[#e8e4dc] hover:border-[#d4a574] hover:text-[#d4a574] transition-colors cursor-default">Linux</span>
+                    </div>
+                </div>
+
+                <!-- Developer Tools -->
+                <div class="card-hover rounded-2xl p-8">
+                    <h3 class="text-lg font-serif font-bold mb-6 text-[#8b6f47] flex items-center gap-3">
+                        <i class="fas fa-tools text-[#c9b18a]"></i> Developer Tools
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-[#5a5a5a] border border-[#e8e4dc] hover:border-[#c9b18a] hover:text-[#c9b18a] transition-colors cursor-default">Power BI</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-[#5a5a5a] border border-[#e8e4dc] hover:border-[#c9b18a] hover:text-[#c9b18a] transition-colors cursor-default">DAX</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-[#5a5a5a] border border-[#e8e4dc] hover:border-[#c9b18a] hover:text-[#c9b18a] transition-colors cursor-default">Tableau</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-[#5a5a5a] border border-[#e8e4dc] hover:border-[#c9b18a] hover:text-[#c9b18a] transition-colors cursor-default">Git</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-[#5a5a5a] border border-[#e8e4dc] hover:border-[#c9b18a] hover:text-[#c9b18a] transition-colors cursor-default">VS Code</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-[#5a5a5a] border border-[#e8e4dc] hover:border-[#c9b18a] hover:text-[#c9b18a] transition-colors cursor-default">AWS</span>
+                    </div>
+                </div>
+
+                <!-- Libraries -->
+                <div class="card-hover rounded-2xl p-8">
+                    <h3 class="text-lg font-serif font-bold mb-6 text-[#8b6f47] flex items-center gap-3">
+                        <i class="fas fa-book text-[#d4a574]"></i> Libraries
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-[#5a5a5a] border border-[#e8e4dc] hover:border-[#d4a574] hover:text-[#d4a574] transition-colors cursor-default">Scikit-Learn</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-[#5a5a5a] border border-[#e8e4dc] hover:border-[#d4a574] hover:text-[#d4a574] transition-colors cursor-default">TensorFlow</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-[#5a5a5a] border border-[#e8e4dc] hover:border-[#d4a574] hover:text-[#d4a574] transition-colors cursor-default">PyTorch</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-[#5a5a5a] border border-[#e8e4dc] hover:border-[#d4a574] hover:text-[#d4a574] transition-colors cursor-default">FastAPI</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-[#5a5a5a] border border-[#e8e4dc] hover:border-[#d4a574] hover:text-[#d4a574] transition-colors cursor-default">Streamlit</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-[#5a5a5a] border border-[#e8e4dc] hover:border-[#d4a574] hover:text-[#d4a574] transition-colors cursor-default">Pandas</span>
+                    </div>
+                </div>
+
+                <!-- Core Skills -->
+                <div class="card-hover rounded-2xl p-8 md:col-span-2 lg:col-span-3">
+                    <h3 class="text-lg font-serif font-bold mb-6 text-[#8b6f47] flex items-center gap-3">
+                        <i class="fas fa-bullseye text-[#d4a574]"></i> Core Competencies
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white p-4 rounded-xl text-center border border-[#e8e4dc] hover:border-[#d4a574] transition-colors group">
+                            <i class="fas fa-database text-2xl text-[#d4a574] mb-2 group-hover:scale-110 transition-transform"></i>
+                            <p class="text-sm font-medium text-[#2c2c2c]">ETL Pipelines</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl text-center border border-[#e8e4dc] hover:border-[#d4a574] transition-colors group">
+                            <i class="fas fa-warehouse text-2xl text-[#d4a574] mb-2 group-hover:scale-110 transition-transform"></i>
+                            <p class="text-sm font-medium text-[#2c2c2c]">Data Warehousing</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl text-center border border-[#e8e4dc] hover:border-[#d4a574] transition-colors group">
+                            <i class="fas fa-robot text-2xl text-[#d4a574] mb-2 group-hover:scale-110 transition-transform"></i>
+                            <p class="text-sm font-medium text-[#2c2c2c]">Machine Learning</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl text-center border border-[#e8e4dc] hover:border-[#d4a574] transition-colors group">
+                            <i class="fas fa-brain text-2xl text-[#d4a574] mb-2 group-hover:scale-110 transition-transform"></i>
+                            <p class="text-sm font-medium text-[#2c2c2c]">Deep Learning</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl text-center border border-[#e8e4dc] hover:border-[#d4a574] transition-colors group">
+                            <i class="fas fa-chart-pie text-2xl text-[#d4a574] mb-2 group-hover:scale-110 transition-transform"></i>
+                            <p class="text-sm font-medium text-[#2c2c2c]">Data Visualization</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl text-center border border-[#e8e4dc] hover:border-[#d4a574] transition-colors group">
+                            <i class="fas fa-plug text-2xl text-[#d4a574] mb-2 group-hover:scale-110 transition-transform"></i>
+                            <p class="text-sm font-medium text-[#2c2c2c]">API Development</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl text-center border border-[#e8e4dc] hover:border-[#d4a574] transition-colors group">
+                            <i class="fas fa-cloud text-2xl text-[#d4a574] mb-2 group-hover:scale-110 transition-transform"></i>
+                            <p class="text-sm font-medium text-[#2c2c2c]">Cloud Architecture</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl text-center border border-[#e8e4dc] hover:border-[#d4a574] transition-colors group">
+                            <i class="fas fa-shield-alt text-2xl text-[#d4a574] mb-2 group-hover:scale-110 transition-transform"></i>
+                            <p class="text-sm font-medium text-[#2c2c2c]">Cybersecurity</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Certifications -->
+    <section class="py-20 px-6 content-section">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-16">
+                <p class="font-elegant text-[#d4a574] text-lg italic mb-2">Credentials</p>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-[#2c2c2c]">Certifications</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="card-hover rounded-xl p-6 flex items-center gap-6 group">
+                    <div class="w-14 h-14 bg-[#f5f1e8] rounded-2xl flex items-center justify-center flex-shrink-0 border border-[#e8e4dc] group-hover:border-[#d4a574] transition-colors">
+                        <i class="fas fa-database text-[#d4a574] text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-serif font-bold text-lg text-[#2c2c2c]">MongoDB Associate DBA</h3>
+                        <p class="text-sm text-[#5a5a5a]">Database Administration Certification</p>
+                    </div>
+                    <span class="text-sm text-[#5a5a5a] bg-[#f5f1e8] px-4 py-1.5 rounded-full border border-[#e8e4dc]">2025</span>
+                </div>
+
+                <div class="card-hover rounded-xl p-6 flex items-center gap-6 group">
+                    <div class="w-14 h-14 bg-[#f5f1e8] rounded-2xl flex items-center justify-center flex-shrink-0 border border-[#e8e4dc] group-hover:border-[#d4a574] transition-colors">
+                        <i class="fab fa-aws text-[#d4a574] text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-serif font-bold text-lg text-[#2c2c2c]">AWS Academy Graduate</h3>
+                        <p class="text-sm text-[#5a5a5a]">Cloud Architecture & Cloud Foundations</p>
+                    </div>
+                    <span class="text-sm text-[#5a5a5a] bg-[#f5f1e8] px-4 py-1.5 rounded-full border border-[#e8e4dc]">2024</span>
+                </div>
+
+                <div class="card-hover rounded-xl p-6 flex items-center gap-6 group">
+                    <div class="w-14 h-14 bg-[#f5f1e8] rounded-2xl flex items-center justify-center flex-shrink-0 border border-[#e8e4dc] group-hover:border-[#d4a574] transition-colors">
+                        <i class="fas fa-graduation-cap text-[#d4a574] text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-serif font-bold text-lg text-[#2c2c2c]">DataCamp Machine Learning Scientist</h3>
+                        <p class="text-sm text-[#5a5a5a]">21 sub-courses in Python + 9 sub-courses in R Programming</p>
+                    </div>
+                    <span class="text-sm text-[#5a5a5a] bg-[#f5f1e8] px-4 py-1.5 rounded-full border border-[#e8e4dc]">2024</span>
+                </div>
+
+                <div class="card-hover rounded-xl p-6 flex items-center gap-6 group">
+                    <div class="w-14 h-14 bg-[#f5f1e8] rounded-2xl flex items-center justify-center flex-shrink-0 border border-[#e8e4dc] group-hover:border-[#d4a574] transition-colors">
+                        <i class="fas fa-mobile-alt text-[#d4a574] text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-serif font-bold text-lg text-[#2c2c2c]">Android App Development</h3>
+                        <p class="text-sm text-[#5a5a5a]">Imarticus Learning</p>
+                    </div>
+                    <span class="text-sm text-[#5a5a5a] bg-[#f5f1e8] px-4 py-1.5 rounded-full border border-[#e8e4dc]">2023</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Achievements -->
+    <section id="achievements" class="py-20 px-6 content-section bg-[#f5f1e8]/20">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <p class="font-elegant text-[#d4a574] text-lg italic mb-2">Recognition</p>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-[#2c2c2c]">Achievements & Leadership</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card-hover rounded-2xl p-8 border-l-4 border-[#d4a574]">
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">🥈</div>
+                        <div>
+                            <h3 class="font-serif font-bold text-xl mb-2 text-[#2c2c2c]">MSC Hackathon - 2nd Place</h3>
+                            <p class="text-[#5a5a5a] leading-relaxed">Built an AR shopping app for e-commerce, outperforming <strong class="text-[#2c2c2c]">50+ teams</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-hover rounded-2xl p-8 border-l-4 border-[#c9b18a]">
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">🥇</div>
+                        <div>
+                            <h3 class="font-serif font-bold text-xl mb-2 text-[#2c2c2c]">ACM Hackathon Winner</h3>
+                            <p class="text-[#5a5a5a] leading-relaxed">Built a Farmer Self-Employment mobile app, winning <strong class="text-[#2c2c2c]">1st place</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-hover rounded-2xl p-8 border-l-4 border-[#d4a574]">
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">💼</div>
+                        <div>
+                            <h3 class="font-serif font-bold text-xl mb-2 text-[#2c2c2c]">Treasurer - Women in Open Source</h3>
+                            <p class="text-[#5a5a5a] leading-relaxed">Co-led <strong class="text-[#2c2c2c]">50+ member chapter</strong>, partnered with speakers, and fostered inclusivity</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-hover rounded-2xl p-8 border-l-4 border-[#c9b18a]">
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">🎯</div>
+                        <div>
+                            <h3 class="font-serif font-bold text-xl mb-2 text-[#2c2c2c]">Model United Nations Club</h3>
+                            <p class="text-[#5a5a5a] leading-relaxed">Organized college events for <strong class="text-[#2c2c2c]">200+ attendees</strong>, leading a <strong class="text-[#2c2c2c]">10-member team</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 content-section">
+        <div class="container mx-auto max-w-4xl text-center">
+            <div class="mb-12">
+                <p class="font-elegant text-[#d4a574] text-lg italic mb-2">Get In Touch</p>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-[#2c2c2c] mb-6">Let's Connect</h2>
+                <p class="text-[#5a5a5a] max-w-2xl mx-auto leading-relaxed">
+                    Currently open to data science, AI engineering, and software development opportunities. 
+                    Let's discuss how I can contribute to your team.
+                </p>
+            </div>
+
+            <div class="card-hover rounded-3xl p-12 relative overflow-hidden bg-gradient-to-b from-white to-[#faf9f6]">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#d4a574] via-[#c9b18a] to-[#d4a574]"></div>
+                
+                <div class="relative z-10">
+                    <div class="grid md:grid-cols-3 gap-8 mb-12">
+                        <a href="mailto:shambhavi.gunda@gmail.com" class="group flex flex-col items-center">
+                            <div class="w-16 h-16 bg-[#f5f1e8] rounded-full flex items-center justify-center mb-4 group-hover:bg-[#d4a574] transition-all duration-300 border border-[#e8e4dc]">
+                                <i class="fas fa-envelope text-[#8b6f47] group-hover:text-white text-xl transition-colors"></i>
+                            </div>
+                            <p class="text-sm text-[#5a5a5a] group-hover:text-[#d4a574] transition-colors">shambhavi.gunda@gmail.com</p>
+                        </a>
+                        <a href="tel:+919014070981" class="group flex flex-col items-center">
+                            <div class="w-16 h-16 bg-[#f5f1e8] rounded-full flex items-center justify-center mb-4 group-hover:bg-[#d4a574] transition-all duration-300 border border-[#e8e4dc]">
+                                <i class="fas fa-phone text-[#8b6f47] group-hover:text-white text-xl transition-colors"></i>
+                            </div>
+                            <p class="text-sm text-[#5a5a5a] group-hover:text-[#d4a574] transition-colors">+91 9014070981</p>
+                        </a>
+                        <a href="https://linkedin.com/in/shambhavi-gunda" target="_blank" class="group flex flex-col items-center">
+                            <div class="w-16 h-16 bg-[#f5f1e8] rounded-full flex items-center justify-center mb-4 group-hover:bg-[#d4a574] transition-all duration-300 border border-[#e8e4dc]">
+                                <i class="fab fa-linkedin-in text-[#8b6f47] group-hover:text-white text-xl transition-colors"></i>
+                            </div>
+                            <p class="text-sm text-[#5a5a5a] group-hover:text-[#d4a574] transition-colors">LinkedIn Profile</p>
+                        </a>
+                    </div>
+
+                    <a href="RESUME%20.pdf" download="Shambhavi_Gunda_Resume.pdf" class="inline-flex items-center gap-3 bg-[#2c2c2c] text-white px-10 py-4 rounded-full font-medium hover:bg-[#1a1a1a] transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1">
+                        <i class="fas fa-download"></i>
+                        <span>Download Resume</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-[#e8e4dc] py-8 px-6 text-center text-[#5a5a5a] text-sm bg-[#faf9f6]">
+        <p>&copy; 2026 Shambhavi Gunda. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-sm');
+            } else {
+                navbar.classList.remove('shadow-sm');
+            }
+        });
+
+        // Gentle reveal animations
+        gsap.utils.toArray('section').forEach((section, i) => {
+            gsap.fromTo(section, 
+                { opacity: 0.95, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+    </script>
+</body>
+</html>
